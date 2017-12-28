@@ -1,0 +1,29 @@
+server:
+      port: 8001
+eureka:
+  client:
+    serviceUrl:
+            defaultZone: ${eureka.server:http://127.0.0.1:8000}/eureka
+  instance:
+    prefer-ip-address: true      #使用ip进行配置
+    ip-address: 192.168.34.133    #这台机器的ip
+spring:
+  profiles:
+    #active: ${env:native}
+    active: ${env:git}
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/anonNo2/temp-config-files.git
+          searchPaths: ${eureka.env:/dev}
+#          username: anonNo2
+#          password: ********
+        native:
+          configPath:  ${eureka.env:/dev}
+          #search-locations: ${native.configPath:file:config}
+          search-locations: D:/conf/temp
+      discovery:
+        enabled: true
+  application:
+    name: config-service

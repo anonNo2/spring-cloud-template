@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: ${env:dev}
+  application:
+    serviceId : user-service
+    name: user-service
+  cloud:
+    config:
+      discovery:
+            enabled: true
+            service-id: config-service
+      fail-fast: true
+server:
+  port: 9100
+
+ribbon:
+  ConnectionTimeout: 3000
+  ReadTimeout: 5000
+
+eureka:
+  client:
+    service-url:
+            defaultZone: ${eureka.server:http://127.0.0.1:8000/eureka}
